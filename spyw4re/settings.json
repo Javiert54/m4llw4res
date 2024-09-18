@@ -10,7 +10,7 @@
     "Use KeyLogger": 1,
     "Collect Browsers Info": 1,
     "send Data Via SSH": 0,
-    "attacker SSH Server IP": "0.0.0.0",
+    "attacker SSH Server IP": "",
     "attacker SSH Server Username": "user",
     "attacker SSH Server Password": "password",
     "attacker SSH Server Folder": "C:\\Users\\User\\Escritorio"
