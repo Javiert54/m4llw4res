@@ -41,8 +41,6 @@ def autoAbort():    #Creamos una función que aborte el programa si ve que no qu
         loops+=1
     sys.exit()
     
-#hola
-
 def main():
 
     publicIP= net.getPublicIP() #Obtemos la ip local y pública
