@@ -7,7 +7,7 @@ def takeInput(typeOfValue, pattern, response, cin):
             cin = input(f"Invalid input. You must enter {response}\n> ")
             continue
         if  typeOfValue!= str:
-        	cin = typeOfValue(cin)
+            cin = typeOfValue(cin)
         return cin
 
 boolPattern =  r'^[01]$'
@@ -28,7 +28,7 @@ if settings["perform Host Discovery"] == 1:
 	if settings["perform Port Scanning"]== 1:
 		settings["port Scanning Delay"] = takeInput(float, floatPattern, 'a decimal number.', input("How much delay do you want bettween the scann of every port (in Seconds) (Ej: 0.6)? (1=Y / 0=N)\n> "))
 else:
-    setattings["perform Port Scanning"] = 0
+    settings["perform Port Scanning"] = 0
 settings['perform App Discovery'] = takeInput(int, boolPattern, 'a 0 or 1.', input("Do you want to discover the Apps installed? (1=Y / 0=N)\n> "))
 settings['perform User Discovery']= takeInput(int, boolPattern, 'a 0 or 1.', input("Do you want to discover the users? (1=Y / 0=N)\n> "))
 settings['Take Screen Shoots']= takeInput(int, boolPattern, 'a 0 or 1.', input("Do you want to take periodical screen shoots? (1=Y / 0=N)\n> "))
