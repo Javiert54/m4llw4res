@@ -36,7 +36,7 @@ def autoAbort():    #Creamos una función que aborte el programa si ve que no qu
     loops = 0
     while sens.is_task_manager_open()==False and len(threading.enumerate()) >1:
         if loops==8000 and TAKE_SCREEN_SHOTS: #Aprobechamos este loop para tomar screenshoots cada 8000 ciclos
-            sens.takeScreenShot(imageName=datetime.datetime.now().strftime("%Y%m%d_%H%M%S"), path= f"{carpeta_script}\\output\\pictures")
+            sens.takeScreenShot(imageName=datetime.datetime.now().strftime("%Y%m%d_%H%M%S"), path= f"{carpeta_script}\\output\\pictures\\")
             loops = 0 #Reiniciamos la variable para que no se desborde
         loops+=1
     sys.exit()
