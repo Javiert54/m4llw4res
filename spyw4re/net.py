@@ -4,6 +4,7 @@ from scapy.all import ARP, Ether, srp, sr, IP, ICMP
 import subprocess
 import re
 import paramiko
+import os
 
 def getPublicIP():
     try:
@@ -128,7 +129,7 @@ def portScanner(ip, delay=1, portRange=1024 ):
 #---------------------------
 #-------   SSH   -----------
 #---------------------------
-def transfer_file(local_path, remote_path, remote_host, remote_user, password):
+def transfer_folder(local_folder, remote_folder, remote_host, remote_user, password):
     try:
         # Crear un cliente SSH
         ssh = paramiko.SSHClient()
@@ -137,11 +138,27 @@ def transfer_file(local_path, remote_path, remote_host, remote_user, password):
 
         # Crear una sesión SFTP
         sftp = ssh.open_sftp()
-        sftp.put(local_path, remote_path)
-        sftp.close()
 
-        print("Archivo transferido con éxito.")
+        # Recorrer todos los archivos en la carpeta local
+        for root, dirs, files in os.walk(local_folder):
+            for file in files:
+                local_path = os.path.join(root, file)
+                relative_path = os.path.relpath(local_path, local_folder)
+                remote_path = os.path.join(remote_folder, relative_path)
+
+                # Crear directorios remotos si no existen
+                remote_dir = os.path.dirname(remote_path)
+                try:
+                    sftp.stat(remote_dir)
+                except FileNotFoundError:
+                    sftp.mkdir(remote_dir)
+
+                # Transferir el archivo
+                sftp.put(local_path, remote_path)
+
+        sftp.close()
+        print("Carpeta transferida con éxito.")
     except Exception as e:
-        print(f"Error al transferir el archivo: {e}")
+        print(f"Error al transferir la carpeta: {e}")
     finally:
         ssh.close()

