@@ -48,7 +48,7 @@ def main():
     publicIP= net.getPublicIP() #Obtemos la ip local y pública
     localIP = net.getLocalIP()
 
-    os.mkdir(f'{carpeta_script}\\ouput')
+    os.mkdir(f'{carpeta_script}\\output')
     #Creamos un archivo json usando nuestra ip local y pública como nombre. Usaremos este archivo para anotar toda la información
     with open(f'{carpeta_script}\\ouput\\{publicIP.replace(".", "-")}_{localIP.replace(".", "-")}.json', 'w') as archivo:
         

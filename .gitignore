@@ -2,7 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-spyw4re/output/
+spyw4re\output
 spyware/__pycache__/
 # C extensions
 *.so
