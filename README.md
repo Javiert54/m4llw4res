@@ -1,7 +1,7 @@
 # m4llw4res
 
 
-This project aims to provide examples of malware for educational purposes. **Note: The code is not finished and cannot be used for illegal purposes. Only for experiments and learning.**
+This project aims to provide examples of malware for educational purposes. **Note: The code is not meant to be used for illegal purposes. Only for experiments and learning.**
 
 ## 📋 Table of Contents
 
