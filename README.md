@@ -18,11 +18,9 @@ Instructions on how to install and set up the project.
 
 
 
-It is not recommended to experiment with malware directly in your system. So, in order to not damage your computer, please, use a virtual machine.
+It is not recommended to experiment with malware directly on your system. So, in order to not damage your computer, please, use a virtual machine.
 
-link to virtualization software: https://www.virtualbox.org
-
-1. Install VirtualBox on your computer.
+1. Install VirtualBox on your computer ( download link: https://www.virtualbox.org ).
 
 2. Download the MediaCreationTool to create Windows 10 ISOs ( download link: https://go.microsoft.com/fwlink/?LinkId=2265055 )
 
@@ -38,14 +36,14 @@ FROM A VIRTUAL MACHINE of Windows 10:
 git download link: https://git-scm.com/download/win
 ```
 
-	2. Download the project from GitHub
+2. Download the project from GitHub
 
 ```bash
 # Clone the repository
 git clone https://github.com/Javiert54/m4llw4res.git
 ```
-	3. Install python
-		python download link:  https://www.python.org/ftp/python/3.12.6/python-3.12.6-amd64.exe
+3. Install python ( download link:  https://www.python.org/ftp/python/3.12.6/python-3.12.6-amd64.exe )
+
 ### Navigate to the project directory
 ```bash
 cd m4llw4res/<the m4llware you want to try\>
