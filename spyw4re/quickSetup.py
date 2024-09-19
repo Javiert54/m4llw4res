@@ -6,7 +6,7 @@ def takeInput(typeOfValue, pattern, response, cin):
         if not re.match(pattern, cin):
             cin = input(f"Invalid input. You must enter {response}\n> ")
             continue
-        if  typeOfValue!= str:
+        if  typeOfValue is not str:
             cin = typeOfValue(cin)
         return cin
 

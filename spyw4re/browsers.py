@@ -1,5 +1,3 @@
-import browser_cookie3
-from browser_history.browsers import Firefox, Chrome, Edge
 import json
 def getBrowsersInfo(browserCookie, browserHistory):
     

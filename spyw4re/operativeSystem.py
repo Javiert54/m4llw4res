@@ -1,5 +1,4 @@
 import winreg
-import psutil
 import os
 
 
