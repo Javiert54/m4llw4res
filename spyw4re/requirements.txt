@@ -2,7 +2,7 @@ browser_cookie3==0.19.1
 browser_history==0.4.1
 paramiko==3.4.1
 psutil==6.0.0
+PyAutoGUI==0.9.54
 pynput==1.7.7
 Requests==2.32.3
 scapy==2.5.0
-PyAutoGUI==0.9.54

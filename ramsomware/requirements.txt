@@ -1,0 +1,2 @@
+cryptography==43.0.1
+psutil==6.0.0
