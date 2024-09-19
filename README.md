@@ -27,9 +27,11 @@ It is not recommended to experiment with malware directly in your system. So, in
 FROM A VIRTUAL MACHINE of Windows 10:
 	1. Install Git
 ```bash
-		git download link: https://git-scm.com/download/win
+	git download link: https://git-scm.com/download/win
 ```
+
 	2. Download the project from GitHub
+	
 ```bash
 		# Clone the repository
 		git clone https://github.com/Javiert54/m4llw4res.git
