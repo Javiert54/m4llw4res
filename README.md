@@ -19,13 +19,21 @@ Instructions on how to install and set up the project.
 
 
 It is not recommended to experiment with malware directly in your system. So, in order to not damage your computer, please, use a virtual machine.
-	\n link to virtualization software: https://www.virtualbox.org
-	\n 1. Install VirtualBox on your computer.
-	\n 2. Download the MediaCreationTool to create Windows 10 ISOs ( download link: https://go.microsoft.com/fwlink/?LinkId=2265055 )
-	\n 3. Create a Windows 10 ISO
-	\n 4. Create a new virtual machine in VirtualBox using the Windows 10 from the ISO
+
+	link to virtualization software: https://www.virtualbox.org
+
+	1. Install VirtualBox on your computer.
+
+	2. Download the MediaCreationTool to create Windows 10 ISOs ( download link: https://go.microsoft.com/fwlink/?LinkId=2265055 )
+
+	3. Create a Windows 10 ISO
+
+	4. Create a new virtual machine in VirtualBox using the Windows 10 from the ISO
+
 FROM A VIRTUAL MACHINE of Windows 10:
+
 	1. Install Git
+
 ```bash
 git download link: https://git-scm.com/download/win
 ```
