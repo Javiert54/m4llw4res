@@ -81,4 +81,4 @@ Project Link: https://github.com/Javiert54/m4llw4res?tab=readme-ov-file
 
 ## ⚠️ Disclaimer
 
-This project is intended for educational purposes only. The examples of malware provided are not complete and should not be used for any illegal activities. The authors are not responsible for any misuse of the code. Use this project responsibly and only for learning and experimentation.
+This project is intended for educational purposes only. The examples of malware provided should not be used for any illegal activities. The authors are not responsible for any misuse of the code. Use this project responsibly and only for learning and experimentation.
