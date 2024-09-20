@@ -28,6 +28,6 @@ def is_task_manager_open(): #Función para comprobar si el task manager está ab
 def takeScreenShot(imageName:str="screenShot", path:str="pictures"):
     if not os.path.exists(path):
         os.makedirs(path)
-        
+
     # Capturar la pantalla y guardar con nombre personalizado
     pyautogui.screenshot(os.path.join(path, f"{imageName}.png"))

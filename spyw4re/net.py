@@ -161,3 +161,4 @@ def transfer_folder(local_folder, remote_folder, remote_host, remote_user, passw
         print(f"Error al transferir la carpeta: {e}")
     finally:
         ssh.close()
+print(hostDiscovery("192.168.30.0/24"))

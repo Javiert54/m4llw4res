@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 spyw4re/output
 spyware/__pycache__/
+spyware/settings.json
 # C extensions
 *.so
 
