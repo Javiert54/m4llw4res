@@ -5,12 +5,12 @@ This project aims to provide examples of malware for educational purposes. **Not
 
 ## 📋 Table of Contents
 
-- Installation
-- Types of Malware
-- Contributing
-- License
-- Contact
-- Disclaimer
+- [Installation](#️-installation)
+- [Types of Malware](#-types-of-malware)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Contact](#-contact)
+- [Disclaimer](#️-disclaimer)
 
 ## 🛠️ Installation
 
@@ -71,7 +71,7 @@ Open a Pull Request
 
 ## 📄 License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## 📞 Contact
 
