@@ -2,9 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
-spyw4re/output
+spyw4re/output/
 spyware/__pycache__/
 spyw4re/settings.json
+
 # C extensions
 *.so
 
