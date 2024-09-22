@@ -13,7 +13,7 @@ def getPublicIP():
         ip_publica = datos['ip']
         return ip_publica
     except Exception as e:
-        return str(e)
+        return "No.IP"
 
 def getLocalIP():
     # Crear un socket temporal
@@ -24,7 +24,7 @@ def getLocalIP():
         # Obtener la dirección IP local
         ip_privada = s.getsockname()[0]
     except Exception as e:
-        ip_privada = "No se pudo obtener la IP privada\n Error: " + str(e)
+        ip_privada = "No.IP"
     finally:
         s.close()
     return ip_privada

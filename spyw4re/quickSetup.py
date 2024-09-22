@@ -35,7 +35,7 @@ with open(carpeta_script+'\\settings.json', 'w') as file:
     "attacker SSH Server IP": "",
     "attacker SSH Server Username": "user",
     "attacker SSH Server Password": "password",
-    "attacker SSH Server Folder": "C:\\Users\\User\\Escritorio"}
+    "attacker SSH Server Folder": "C:\\Users\\User\\Escritorio\\"}
 
 settings["perform Host Discovery"] = takeInput(int, boolPattern, 'a 0 or 1.', input("Do you want to perform a host Discovery? (1=Y / 0=N)\n> "))
 if settings["perform Host Discovery"] == 1:
@@ -56,7 +56,8 @@ if settings['send Data Via SSH']==1:
     settings['attacker SSH Server Username']= takeInput(str, stringPattern, "the username", input("what is the username of the attacker that will receive the data via SSH?\n> "))
     settings["attacker SSH Server Password"]= takeInput(str, stringPattern, "the password", input("what is the password of the attacker that will receive the data via SSH?\n> "))
     settings["attacker SSH Server Folder"]= takeInput(str, pathPattern, "the path of the folder", input("what is the folder where you want to receive the data?\n> "))
-
+    if not settings["attacker SSH Server Folder"].endswith("/"):
+        settings["attacker SSH Server Folder"]+="/"
 with open(carpeta_script+'\\settings.json', 'w') as file:
     json.dump(settings, file, indent=4)
 
