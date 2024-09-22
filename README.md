@@ -44,10 +44,11 @@ git clone https://github.com/Javiert54/m4llw4res.git
 ```
 3. Install python ( download link:  https://www.python.org/ftp/python/3.12.6/python-3.12.6-amd64.exe )
 
+4. Install the requirements
+
 ```bash
 # Navigate to the project directory
 cd m4llw4res/<the m4llware you want to try>
-# Install dependencies
 pip install -r requirements.txt
 ```
 
