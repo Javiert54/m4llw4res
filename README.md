@@ -47,7 +47,7 @@ git clone https://github.com/Javiert54/m4llw4res.git
 ### Navigate to the project directory
 ```bash
 cd m4llw4res/<the m4llware you want to try>
-### Install dependencies
+# Install dependencies
 pip install -r requirements.txt
 ```
 
