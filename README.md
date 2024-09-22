@@ -48,7 +48,7 @@ git clone https://github.com/Javiert54/m4llw4res.git
 
 ```bash
 # Navigate to the project directory
-cd m4llw4res/<the m4llware you want to try>
+cd m4llw4res/<the malware you want to try>
 pip install -r requirements.txt
 ```
 
