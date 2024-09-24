@@ -33,7 +33,8 @@ FROM A VIRTUAL MACHINE of Windows 10:
 1. Install Git
 
 ```bash
-git download link: https://git-scm.com/download/win
+#git download link:
+https://git-scm.com/download/win
 ```
 
 2. Download the project from GitHub
