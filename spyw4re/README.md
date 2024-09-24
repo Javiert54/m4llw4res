@@ -44,4 +44,5 @@ python quickSetup.py
 python run_spyware.py
 ````
 
-Disclaimer: This project is intended for educational purposes only. The code provided should not be used for any illegal activities. The authors are not responsible for any misuse of the code. Use this project responsibly and only for learning and experimentation.
+## Disclaimer: 
+This project is intended for educational purposes only. The code provided should not be used for any illegal activities. The authors are not responsible for any misuse of the code. Use this project responsibly and only for learning and experimentation.
