@@ -41,7 +41,7 @@ Run the program:
 #First, you need to run the quickSetup.py script to set up the settings.json file
 python quickSetup.py
 #Then, you can run the program
-python run_spyware.py
+python main.py
 ````
 
 ## Disclaimer: 
