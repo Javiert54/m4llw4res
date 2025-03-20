@@ -7,8 +7,7 @@ import ctypes
 
 
 
-if input("Do you want to do this? (y/n)")!="y":
-    print(2/0)
+
 
 def run_as_admin():
     try:
