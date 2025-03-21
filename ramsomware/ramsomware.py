@@ -29,13 +29,13 @@ def run_as_admin():
             # Verifica si ya tiene permisos de administrador en Linux
             if os.geteuid() == 0:
                 print("El script ya tiene permisos de administrador en Linux.")
-                return False
+                return True
             
             # Solicita permisos de administrador
             print("Solicitando permisos de administrador en Linux...")
             command = ["sudo", sys.executable] + sys.argv
             os.execvp("sudo", command)
-        
+            return True
         else:
             print(f"El sistema operativo '{system_name}' no está soportado.")
             return False
