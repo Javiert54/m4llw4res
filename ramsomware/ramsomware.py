@@ -18,31 +18,27 @@ def run_as_admin():
             # Verifica si ya tiene permisos de administrador en Windows
             if ctypes.windll.shell32.IsUserAnAdmin():
                 print("El script ya tiene permisos de administrador en Windows.")
-                return False
-            
+                
+
             # Solicita permisos de administrador
             print("Solicitando permisos de administrador en Windows...")
             args = " ".join(sys.argv)
-            return ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, args, None, 1) == 42
-
+            if ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, args, None, 1) == 42:
+                sys.exit()
         elif system_name == "Linux":
             # Verifica si ya tiene permisos de administrador en Linux
             if os.geteuid() == 0:
                 print("El script ya tiene permisos de administrador en Linux.")
-                return True
             
             # Solicita permisos de administrador
             print("Solicitando permisos de administrador en Linux...")
             command = ["sudo", sys.executable] + sys.argv
             os.execvp("sudo", command)
-            return True
         else:
             print(f"El sistema operativo '{system_name}' no está soportado.")
-            return False
 
     except Exception as e:
         print(f"Error al solicitar permisos de administrador: {e}")
-        return False
 
 
 
@@ -91,9 +87,8 @@ def listar_files_in_dirs(rute):
 
 if __name__ == '__main__':
 
-    if run_as_admin():
-        print("Permisos de administrador concedidos.")
-        sys.exit()
+    run_as_admin()
+        
     try:
 
         # Generación la clave de cifrado y se almacena en una variable.
