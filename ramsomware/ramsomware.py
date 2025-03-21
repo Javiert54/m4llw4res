@@ -18,7 +18,7 @@ def run_as_admin():
             # Verifica si ya tiene permisos de administrador en Windows
             if ctypes.windll.shell32.IsUserAnAdmin():
                 print("El script ya tiene permisos de administrador en Windows.")
-                
+                return
 
             # Solicita permisos de administrador
             print("Solicitando permisos de administrador en Windows...")
@@ -29,7 +29,7 @@ def run_as_admin():
             # Verifica si ya tiene permisos de administrador en Linux
             if os.geteuid() == 0:
                 print("El script ya tiene permisos de administrador en Linux.")
-            
+                return
             # Solicita permisos de administrador
             print("Solicitando permisos de administrador en Linux...")
             command = ["sudo", sys.executable] + sys.argv
